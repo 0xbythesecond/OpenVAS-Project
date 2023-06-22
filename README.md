@@ -37,9 +37,17 @@ Choose a pre-set configuration and create the VM with specified settings.
 
 
 - Connect to the VM via SSH using PowerShell (Windows) or Terminal (MacOS).
-- Wait until the OpenVAS deployment completes and access the web app URL.
-- Log in with provided credentials or try admin/admin if needed.
-- Reset the admin password to a password of your choosing in the example I will be using "GoneAgain123!".
+- Wait until the OpenVAS deployment completes and access the web app URL (`https://172.190.177.16.c.hossted.com`).
+
+<p align="center"><img src="https://github.com/0xbythesecond/OpenVAS-Project/assets/23303634/f96c5464-ada1-4817-8d84-84705873ea64" height="70%" width="70%" alt="SSH Login to OpenVAS VM"/></p>
+
+- Log in with provided credentials or try admin/admin if needed (admin/admin was used below).  
+  <br />
+![Open VAS Login (admin)](https://github.com/0xbythesecond/OpenVAS-Project/assets/23303634/75af9a9d-d250-465c-92e1-47defa898c99)
+
+- Reset the admin password to a password of your choosing in the example I will be using "incorrect".
+  - To change the password, you will go to the person icon at the top right of the page, then select the pencil/note icon near the top left of the page. You will then be shown a pop-up to make the change of the old password to the new password.
+  - If for some reason there is no default value shown for rows per page, you can enter 10 then click save. If this doesn't note and it doesn't accept your input, you can try a different browser using the webapp url to change the password. 
 
 </details>
 
@@ -53,10 +61,26 @@ Choose a pre-set configuration and create the VM with specified settings.
 
 </summary>
 
-Create a new Virtual Machine in Azure Portal, following specified settings
-Ensure you can RDP into the VM after it's created.
-Disable the Windows Firewall and install outdated software.
-Restart the VM and leave it for now.
+- Create a new Virtual Machine in Azure Portal, following specified settings
+  
+| Name | Input|
+|---|---|
+| Resource Group:| Vulnerability-Management (Same as Previous)|
+| VM Name:| Win10-Vulnerable|
+| Region: | Same as the OpenVAS VM (East US 2)|
+| Virtual Network: | Same as OpenVAS (this is important)|
+| Image: | Windows 10 Pro|
+| Size: | Any size with 2 vCPUs|
+| Username: | Labuser / incorrect! (whichever you prefer and easy to remember)|
+| Networking: | Same Vnet as OpenVAS|
+
+- Other tabs that are associated with the VM were left as default and no additional changes were made. 
+- Review Create → Create the VM
+
+  - Ensure you can RDP into the VM after it's created.
+  - While inside the vulnerable VM, Disable the Windows Firewall and install [outdated software](https://drive.google.com/drive/folders/1n83ilCjZWZulbDdYnUe9wQPK2buY47_U)(be sure that this is done inside the virtual machine).
+  - You will install each of them with the defaults as there will be no changes/adjustments necessary here. 
+  - Restart the VM and leave it for now.
 </details>
 
 #
