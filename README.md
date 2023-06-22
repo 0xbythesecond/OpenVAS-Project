@@ -37,7 +37,7 @@ Choose a pre-set configuration and create the VM with specified settings.
 
 
 - Connect to the VM via SSH using PowerShell (Windows) or Terminal (MacOS).
-- Wait until the OpenVAS deployment completes and access the web app URL (`https://172.190.177.16.c.hossted.com`).
+- Wait until the OpenVAS deployment completes and access the web app URL (For this example: `https://172.190.177.16.c.hossted.com`).
 
 <p align="center"><img src="https://github.com/0xbythesecond/OpenVAS-Project/assets/23303634/f96c5464-ada1-4817-8d84-84705873ea64" height="70%" width="70%" alt="SSH Login to OpenVAS VM"/></p>
 
@@ -67,14 +67,14 @@ Choose a pre-set configuration and create the VM with specified settings.
 |---|---|
 | Resource Group:| Vulnerability-Management (Same as Previous)|
 | VM Name:| Win10-Vulnerable|
-| Region: | Same as the OpenVAS VM (East US 2)|
+| Region: | Same as the OpenVAS VM (East US)|
 | Virtual Network: | Same as OpenVAS (this is important)|
 | Image: | Windows 10 Pro|
 | Size: | Any size with 2 vCPUs|
 | Username: | Labuser / incorrect! (whichever you prefer and easy to remember)|
 | Networking: | Same Vnet as OpenVAS|
 
-- Other tabs that are associated with the VM were left as default and no additional changes were made. 
+- The other tabs that are associated with the VM were left as default and no additional changes were made. 
 - Review Create → Create the VM
 
   - Ensure you can RDP into the VM after it's created.
@@ -93,10 +93,35 @@ Choose a pre-set configuration and create the VM with specified settings.
 
 </summary>
 
-Log in to OpenVAS and add the Client VM's private IP address as a new host.
-Create a new target named "Azure Vulnerable VMs" using the host information.
-Create a new task named "Scan - Azure Vulnerable VMs" with the target.
-Start the scan and review the results once it's completed.
+- Log in to OpenVAS and add the Client VM's (Win-10 Vulnerable) private IP address as a new host.
+  - Hover over Assets → Host → New Host Icon at the top left.
+- Create a new target named "Azure Vulnerable VMs" using the host information.
+  
+![Create a new target from the host](https://github.com/0xbythesecond/OpenVAS-Project/assets/23303634/db7970bb-8241-4d01-977f-47b224a20061)
+
+  >**Note**: Take note of the credentials as you scroll down the page below and leave them as their default. We will add SMB credentials later.
+![New target azure vulnerable vms](https://github.com/0xbythesecond/OpenVAS-Project/assets/23303634/f340338d-e4ce-4f03-b97e-40d3e4c714ac)
+
+  
+- Create a new task named "Scan - Azure Vulnerable VMs" with the target.
+  - Hover over Scans → Task → New Task Icon at the top left
+  - Scan Targets → “Azure Vulnerable VMs” (This is the target that we created previously)
+![Create a new scan task](https://github.com/0xbythesecond/OpenVAS-Project/assets/23303634/3f0a2585-b5f8-4c2d-acce-21c1b14d74d4)
+
+- Start the scan and review the results once it's completed.
+  - The status will change from Requested  → Queued →  Percentage Loaded → Done
+  ![Start uncredentialed vulnerability scan](https://github.com/0xbythesecond/OpenVAS-Project/assets/23303634/d89246f1-b32f-4cf3-ba69-acc87896ee02)
+  - After pressing the ▶️ button, the Status reflects to be loading
+  ![Uncredentialed scan status loading](https://github.com/0xbythesecond/OpenVAS-Project/assets/23303634/d888d64b-2a5f-40c8-ae3a-2cacb9d21daa)
+  - Status is now Done and you can select the report to review the vulnerabilities for the uncredentialed scan. 
+  ![Uncredentialed scan done](https://github.com/0xbythesecond/OpenVAS-Project/assets/23303634/1e2d7022-2ba6-40a0-a94c-20f52c2fb09c)
+
+- To remove the filtered results of the report, you can select the `X` near the top of the page and it will display more vulnerabilities.
+  >**Note**: Once the filter is removed here, it will display those that include a `0.0` as their severity level as well. 
+![Filtered results of non-credentialed scan](https://github.com/0xbythesecond/OpenVAS-Project/assets/23303634/3c9aeaa6-1d41-4ad5-a6b0-835aed0a605c)
+
+
+
 </details>
 
 #
@@ -109,8 +134,33 @@ Start the scan and review the results once it's completed.
 
 </summary>
 
-Make necessary configurations within the vulnerable VM (Windows settings).
-Make corresponding configurations in OpenVAS for credentialed scans.
+- Make necessary configurations within the vulnerable VM (Windows settings).
+- Disable Firewall (done in Task 2 if you happen to have missed it there)
+ - Disable User Account Control
+![disable user account control](https://github.com/0xbythesecond/OpenVAS-Project/assets/23303634/7565fd04-bc78-4ad1-8090-e149fb53e525)
+ - Enable Remote Registry
+ - Set Registry Key
+ - Launch Registry Editor (regedit.exe) in “Run as administrator” mode and grant Admin Approval, if requested
+ - Navigate to HKEY_LOCAL_MACHINE hive
+ - Open SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System key
+ - Create a new DWORD (32-bit) value with the following properties:  Name: LocalAccountTokenFilterPolicy  Value: 1
+ - Close Registry Editor  
+ - Restart the VM
+
+- Make corresponding configurations in OpenVAS for credentialed scans.
+  - Go to Configuration → Credentials → New Credential
+  - Name / Comment → “Azure VM Credentials”
+| Settings | Value |
+|----|----|
+|Allow Insecure Use: | Yes|
+| Username: | azureuser |
+| Password: | incorrect!|
+Save
+Go to Configuration → Targets → CLONE the Target we made before
+NEW Name / Comment: “Azure Vulnerable VMs - Credentialed Scan”
+Ensure the Private IP is still accurate
+Credentials 
+
 </details>
 
 #
