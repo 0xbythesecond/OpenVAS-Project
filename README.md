@@ -30,14 +30,16 @@ Choose a pre-set configuration and create the VM with specified settings.
 | VM Name:| OpenVAS (Take note of the region and Vnet–consider East US )|
 | Region: | East US (`make sure to note the region and Vnet`)|
 | Authentication: | Password (Provide Username/Password)|
-| Monitoring: | Disable Boot Diagnostic (don’t need it)|
-Create → Create
+
+- On the Disk Tab, Networking, Management, and Advanced we will let them remain as their default Settings.
+- For the Monitoring tab, we will disable boot diagnostics as it will not be needed in the lab. You can learn more about boot diagnostics [here](https://learn.microsoft.com/en-us/azure/virtual-machines/boot-diagnostics).
+- Review Create → Create
 
 
-Connect to the VM via SSH using PowerShell (Windows) or Terminal (MacOS).
-Wait until the OpenVAS deployment completes and access the web app URL.
-Log in with provided credentials or try admin/admin if needed.
-Reset the admin password to a password of your choosing in the example I will be using "GoneAgain123!".
+- Connect to the VM via SSH using PowerShell (Windows) or Terminal (MacOS).
+- Wait until the OpenVAS deployment completes and access the web app URL.
+- Log in with provided credentials or try admin/admin if needed.
+- Reset the admin password to a password of your choosing in the example I will be using "GoneAgain123!".
 
 </details>
 
