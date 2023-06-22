@@ -24,7 +24,7 @@ Access the Azure Portal and navigate to the Marketplace.
 Search for "OpenVAS secured and supported by HOSSTED" and select it.
 Choose a pre-set configuration and create the VM with specified settings.
 
-| Name | Input|
+| Setting | Value|
 |---|---|
 | Resource Group:| Vulnerability-Management|
 | VM Name:| OpenVAS (Take note of the region and Vnet–consider East US )|
@@ -63,7 +63,7 @@ Choose a pre-set configuration and create the VM with specified settings.
 
 - Create a new Virtual Machine in Azure Portal, following specified settings
   
-| Name | Input|
+| Setting | Value|
 |---|---|
 | Resource Group:| Vulnerability-Management (Same as Previous)|
 | VM Name:| Win10-Vulnerable|
