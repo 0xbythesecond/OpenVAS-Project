@@ -134,11 +134,15 @@ Choose a pre-set configuration and create the VM with specified settings.
 
 </summary>
 
-- Make necessary configurations within the vulnerable VM (Windows settings).
+Make necessary configurations within the vulnerable VM (Windows settings).
 - Disable Firewall (done in Task 2 if you happen to have missed it there)
  - Disable User Account Control
 ![disable user account control](https://github.com/0xbythesecond/OpenVAS-Project/assets/23303634/7565fd04-bc78-4ad1-8090-e149fb53e525)
  - Enable Remote Registry
+   - Do a quick search for `Services.msc` at the bottom left of the Windows machine.
+   - Scroll down to Remote Registry  → Double click (to select)  → Startup Type set to `Automatic` → Start → Apply → OK. 
+   <img src="https://github.com/0xbythesecond/OpenVAS-Project/assets/23303634/289f6e00-1fe1-44be-99db-8749c8ef0a62" height="70%" width="70%" alt="Enable remote registry"/>
+
  - Set Registry Key
  - Launch Registry Editor (regedit.exe) in “Run as administrator” mode and grant Admin Approval, if requested
  - Navigate to HKEY_LOCAL_MACHINE hive
@@ -147,19 +151,23 @@ Choose a pre-set configuration and create the VM with specified settings.
  - Close Registry Editor  
  - Restart the VM
 
-- Make corresponding configurations in OpenVAS for credentialed scans.
+Make corresponding configurations in OpenVAS for credentialed scans.
   - Go to Configuration → Credentials → New Credential
   - Name / Comment → “Azure VM Credentials”
+    
 | Settings | Value |
 |----|----|
 |Allow Insecure Use: | Yes|
 | Username: | azureuser |
 | Password: | incorrect!|
-Save
-Go to Configuration → Targets → CLONE the Target we made before
-NEW Name / Comment: “Azure Vulnerable VMs - Credentialed Scan”
-Ensure the Private IP is still accurate
-Credentials 
+
+- Save
+- Go to Configuration → Targets → CLONE the Target we made before
+- NEW Name / Comment: “Azure Vulnerable VMs - Credentialed Scan”
+- Ensure the Private IP is still accurate
+- Credentials → SMB → Select the Credentials we just made: Azure VM Credentials
+- Save
+
 
 </details>
 
