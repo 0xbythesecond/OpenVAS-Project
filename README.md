@@ -1,4 +1,4 @@
-# Azure Vulnerability Management Lab: Assessing and Remediating Security Risks (In Process)
+# Azure Vulnerability Management Lab: Assessing and Remediating Security Risks 
 
 ![Azure Vulnerability Management Lab Assessing and Remediating Security Risks](https://github.com/0xbythesecond/OpenVAS-Project/assets/23303634/e58df21b-9f53-4ba4-b6a9-9a31d5b9ea94)
 
