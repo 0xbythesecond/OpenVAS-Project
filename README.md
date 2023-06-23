@@ -41,10 +41,12 @@ Lab Steps:
 
 - On the Disk Tab, Networking, Management, and Advanced we will let them remain as their default Settings.
 - For the Monitoring tab, we will disable boot diagnostics as it will not be needed in the lab. You can learn more about boot diagnostics [here](https://learn.microsoft.com/en-us/azure/virtual-machines/boot-diagnostics).
+  ![Open VAS VM Monitoring Settings](https://github.com/0xbythesecond/OpenVAS-Project/assets/23303634/8c88a1a5-352a-449d-99c0-71af1b8c05bd)
+
 - Review Create → Create
 
 
-- Connect to the VM via SSH using PowerShell (Windows) or Terminal (MacOS).
+- Connect to the OpenVAS VM via SSH using PowerShell (Windows) or Terminal (MacOS).
 - Wait until the OpenVAS deployment completes and access the web app URL (For this example: `https://172.190.177.16.c.hossted.com`).
 
 <p align="center"><img src="https://github.com/0xbythesecond/OpenVAS-Project/assets/23303634/f96c5464-ada1-4817-8d84-84705873ea64" height="70%" width="70%" alt="SSH Login to OpenVAS VM"/></p>
@@ -254,7 +256,13 @@ Re-initiate the credentialed scan (“Scan - Azure Vulnerable VMs - Credentialed
  >**Note**: In the trend column, we can notice that there is a downward trend now that we have removed the outdated programs.
 ![Credentialed scan results (removed outdated programs)](https://github.com/0xbythesecond/OpenVAS-Project/assets/23303634/c26d47f1-7da6-4eb7-aa40-d3b578f7cc25)
 
-- We can drill down into the results of the report
+- We can drill down into the results of the report to view the impact of the vulnerabilities that are remaining and the available solutions.
+  ![expanded result of windows iexpress](https://github.com/0xbythesecond/OpenVAS-Project/assets/23303634/8fc279e4-1355-4c05-9b4e-703ad0ffaeb6)
+
+### Clean Up Resources
+
+- Upon the completion of the lab, the resources can not be deleted and the easiest way for this to be done is by deleting the resource group as it contains all the resources.
+![Delete resource group](https://github.com/0xbythesecond/OpenVAS-Project/assets/23303634/86c72d5b-876e-4c84-b54b-f2f13ec10528)
 
 </details>
 
