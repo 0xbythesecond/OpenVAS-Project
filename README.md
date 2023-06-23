@@ -1,5 +1,8 @@
 # Azure Vulnerability Management Lab: Assessing and Remediating Security Risks (In Process)
 
+![Azure Vulnerability Management Lab Assessing and Remediating Security Risks](https://github.com/0xbythesecond/OpenVAS-Project/assets/23303634/e58df21b-9f53-4ba4-b6a9-9a31d5b9ea94)
+
+
 ## Introduction:
 In this lab, we will guide you through the process of setting up a vulnerability management environment in Azure. You will learn how to configure and utilize OpenVAS, a vulnerability scanner, to identify and assess security vulnerabilities in a Windows virtual machine (VM). Additionally, you will perform credentialed scans, apply remediations, and verify the effectiveness of the remediation measures.
 
@@ -20,9 +23,11 @@ Lab Steps:
   
 </summary>
 
-Access the Azure Portal and navigate to the Marketplace.
-Search for "OpenVAS secured and supported by HOSSTED" and select it.
-Choose a pre-set configuration and create the VM with specified settings.
+- Access the Azure Portal and navigate to the Marketplace.
+- Search for "OpenVAS secured and supported by HOSSTED" and select it.
+- Choose a pre-set configuration and create the VM with specified settings.
+  ![Choose General Purpose Virtual Machine](https://github.com/0xbythesecond/OpenVAS-Project/assets/23303634/bf4d0933-1263-4113-86ae-46a83ca26455)
+- Virtual Machine Settings
 
 | Setting | Value|
 |---|---|
@@ -30,6 +35,9 @@ Choose a pre-set configuration and create the VM with specified settings.
 | VM Name:| OpenVAS (Take note of the region and Vnet–consider East US )|
 | Region: | East US (`make sure to note the region and Vnet`)|
 | Authentication: | Password (Provide Username/Password)|
+
+<img src="https://github.com/0xbythesecond/OpenVAS-Project/assets/23303634/188732d1-c712-4167-bc04-6653212c3400" height="60%" width="60%" alt="Open VAS VM Basic Settings"/>
+
 
 - On the Disk Tab, Networking, Management, and Advanced we will let them remain as their default Settings.
 - For the Monitoring tab, we will disable boot diagnostics as it will not be needed in the lab. You can learn more about boot diagnostics [here](https://learn.microsoft.com/en-us/azure/virtual-machines/boot-diagnostics).
@@ -47,6 +55,8 @@ Choose a pre-set configuration and create the VM with specified settings.
 
 - Reset the admin password to a password of your choosing in the example I will be using "incorrect".
   - To change the password, you will go to the person icon at the top right of the page, then select the pencil/note icon near the top left of the page. You will then be shown a pop-up to make the change of the old password to the new password.
+  ![Change Open VAS Password](https://github.com/0xbythesecond/OpenVAS-Project/assets/23303634/f64d79d6-4250-4f98-8bb4-e2823299cbd1)
+
   - If for some reason there is no default value shown for rows per page, you can enter 10 then click save. If this doesn't note and it doesn't accept your input, you can try a different browser using the webapp url to change the password. 
 
 </details>
@@ -147,7 +157,14 @@ Make necessary configurations within the vulnerable VM (Windows settings).
  - Launch Registry Editor (regedit.exe) in “Run as administrator” mode and grant Admin Approval, if requested
  - Navigate to HKEY_LOCAL_MACHINE hive
  - Open SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System key
- - Create a new DWORD (32-bit) value with the following properties:  Name: LocalAccountTokenFilterPolicy  Value: 1
+ - Create a new DWORD (32-bit) value with the following properties:
+ - ![create secret key](https://github.com/0xbythesecond/OpenVAS-Project/assets/23303634/ca128c76-a593-4f7a-8470-62414b97f54d)
+ - Name: LocalAccountTokenFilterPolicy
+   - After DWORD (32-bit) is selected you will add `LocalAccountTokenFilterPolicy` without any spaces added.  
+ - Value: 1
+   - Double click → LocalAccountTokenFilterPolicy → Change Value from 0 to 1 → OK
+   ![Edit dword value 1](https://github.com/0xbythesecond/OpenVAS-Project/assets/23303634/29fc67a5-9e64-4fe7-b278-08035ca2356b)
+
  - Close Registry Editor  
  - Restart the VM
 
@@ -159,13 +176,18 @@ Make corresponding configurations in OpenVAS for credentialed scans.
 |----|----|
 |Allow Insecure Use: | Yes|
 | Username: | azureuser |
-| Password: | incorrect!|
+| Password: | password (same password as vulnerable VM)|
 
 - Save
+![create new credentials openvas](https://github.com/0xbythesecond/OpenVAS-Project/assets/23303634/35277a1e-6587-45c7-8b4c-99c71307fb66)
+
 - Go to Configuration → Targets → CLONE the Target we made before
+  ![Clone Targets](https://github.com/0xbythesecond/OpenVAS-Project/assets/23303634/5bbf9b60-25d3-4dbe-853f-d15f067c1678)
 - NEW Name / Comment: “Azure Vulnerable VMs - Credentialed Scan”
 - Ensure the Private IP is still accurate
 - Credentials → SMB → Select the Credentials we just made: Azure VM Credentials
+ ![New Name for Target Credentialed Scan](https://github.com/0xbythesecond/OpenVAS-Project/assets/23303634/4e616870-1c7d-41b3-8e14-ad27ab0d3c19)
+
 - Save
 
 
@@ -181,8 +203,25 @@ Make corresponding configurations in OpenVAS for credentialed scans.
 </summary>
 
 Clone the previous scan task and edit it for credentialed scanning.
+- CLONE the “Scan - Azure Vulnerable VMs” Task, then Edit it:
+- Name / Comment → “Scan - Azure Vulnerable VMs - Credentialed”
+- Targets: Azure Vulnerable VMs - Credentialed Scan
+![Create New Name for Credentialed Scan Clone](https://github.com/0xbythesecond/OpenVAS-Project/assets/23303634/907e1986-717f-4ad5-9448-4df94d851f1c)
+- Save
+- Click the ▶️ button to launch the new Credentialed Scan, and wait for it to finish
+ ![Start Credentialed Scan](https://github.com/0xbythesecond/OpenVAS-Project/assets/23303634/1e41a8ff-96dd-44d5-bda9-17851d2f53f7)
+
+  >**Note**: Since this is a credentialed scan, it will take longer than the last one. Wait for it to finish
+
+
 Launch the new credentialed scan and wait for it to finish.
 Observe the differences in findings compared to the unauthenticated scan.
+![completed credentialed scan](https://github.com/0xbythesecond/OpenVAS-Project/assets/23303634/cea21d19-fafe-462d-877b-727f1561117a)
+
+Results of the credentialed scan
+![credentialed scan results](https://github.com/0xbythesecond/OpenVAS-Project/assets/23303634/dc952cc3-f93e-4361-9e13-0b6fe516d7fc)
+
+
 </details>
 
 #
@@ -196,7 +235,9 @@ Observe the differences in findings compared to the unauthenticated scan.
 </summary>
 
 Log back into the Win10-Vulnerable VM and uninstall outdated software.
-Restart the VM to apply the changes.
+- Search Control Panel → Uninstall Programs → Select Each Outdated of the Programs (VLC media player 1.1.7, Mozilla Firefox (x64 en-US), Adobe Reader X)
+![Unistall Programs](https://github.com/0xbythesecond/OpenVAS-Project/assets/23303634/4f548d41-bb62-4eac-a832-d5bfb8c96357)
+- Restart the VM to apply the changes.
 </details>
 
 #
@@ -209,5 +250,24 @@ Restart the VM to apply the changes.
 
 </summary>
 
-Re-initiate the credentialed scan and observe the updated results.
+Re-initiate the credentialed scan (“Scan - Azure Vulnerable VMs - Credentialed") and observe the updated results.
+ >**Note**: In the trend column, we can notice that there is a downward trend now that we have removed the outdated programs.
+![Credentialed scan results (removed outdated programs)](https://github.com/0xbythesecond/OpenVAS-Project/assets/23303634/c26d47f1-7da6-4eb7-aa40-d3b578f7cc25)
+
+- We can drill down into the results of the report
+
 </details>
+
+## Reflection:
+This lab provided hands-on experience in setting up and using a vulnerability management scanner with Azure and OpenVAS. It highlighted the importance of proactive vulnerability management and the impact of misconfigurations and outdated software on system security.
+
+Configuring OpenVAS for unauthenticated scans and performing the scans allowed me to identify vulnerabilities and understand the need for regular scanning to detect security risks.
+
+Implementing credentialed scans and comparing the results with unauthenticated scans demonstrated the value of using proper credentials for accurate vulnerability identification.
+
+Remediating vulnerabilities by uninstalling outdated software and verifying the changes through subsequent scans reinforced the importance of timely actions to reduce the attack surface.
+
+## Conclusion:
+This lab enhanced my understanding of vulnerability management and the continuous effort required for maintaining a secure environment. It emphasized the significance of proactive security practices, timely remediation, and the value of comprehensive scanning approaches.
+
+I now possess practical knowledge and skills in vulnerability management using Azure and OpenVAS, ready to apply them in real-world scenarios and contribute to effective system protection.
