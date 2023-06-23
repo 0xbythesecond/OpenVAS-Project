@@ -1,10 +1,9 @@
 # Azure Vulnerability Management Lab: Assessing and Remediating Security Risks 
 
-![Azure Vulnerability Management Lab Assessing and Remediating Security Risks](https://github.com/0xbythesecond/OpenVAS-Project/assets/23303634/e58df21b-9f53-4ba4-b6a9-9a31d5b9ea94)
-
+![Azure Vulnerability Management Lab Assessing and Remediating Security Risks(2)](https://github.com/0xbythesecond/OpenVAS-Project/assets/23303634/e81789b3-d8d4-49c3-93fd-e9088031c95a)
 
 ## Introduction:
-In this lab, we will guide you through the process of setting up a vulnerability management environment in Azure. You will learn how to configure and utilize OpenVAS, a vulnerability scanner, to identify and assess security vulnerabilities in a Windows virtual machine (VM). Additionally, you will perform credentialed scans, apply remediations, and verify the effectiveness of the remediation measures.
+In this lab, I will go through the process of setting up a vulnerability management environment in Azure. I look to learn how to configure and utilize OpenVAS, a vulnerability scanner, to identify and assess security vulnerabilities in a Windows virtual machine (VM). Additionally, I will perform credentialed scans, apply remediations, and verify the effectiveness of the remediation measures.
 
 ## Prerequisites:
 - Computer with Internet access
