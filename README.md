@@ -255,7 +255,7 @@ Re-initiate the credentialed scan (“Scan - Azure Vulnerable VMs - Credentialed
  >**Note**: In the trend column, we can notice that there is a downward trend now that we have removed the outdated programs.
 ![Credentialed scan results (removed outdated programs)](https://github.com/0xbythesecond/OpenVAS-Project/assets/23303634/c26d47f1-7da6-4eb7-aa40-d3b578f7cc25)
 
-- We can drill down into the results of the report to view the impact of the vulnerabilities that are remaining and the available solutions.
+- The vulnerabilities for FireFox, VLC Player, or Adobe ReaderWe are no longer present. Additionally, we can drill down into the results of the report to view the impact of the vulnerabilities that are remaining and the available solutions.
   ![expanded result of windows iexpress](https://github.com/0xbythesecond/OpenVAS-Project/assets/23303634/8fc279e4-1355-4c05-9b4e-703ad0ffaeb6)
 
 ### Clean Up Resources
