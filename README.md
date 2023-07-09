@@ -35,7 +35,7 @@ Lab Steps:
 | Region: | East US (`make sure to note the region and Vnet`)|
 | Authentication: | Password (Provide Username/Password)|
 
-<img src="https://github.com/0xbythesecond/OpenVAS-Project/assets/23303634/188732d1-c712-4167-bc04-6653212c3400" height="60%" width="60%" alt="Open VAS VM Basic Settings"/>
+<img src="https://github.com/0xbythesecond/OpenVAS-Project/assets/23303634/188732d1-c712-4167-bc04-6653212c3400" width="700" alt="Open VAS VM Basic Settings"/>
 
 
 - On the Disk Tab, Networking, Management, and Advanced we will let them remain as their default Settings.
